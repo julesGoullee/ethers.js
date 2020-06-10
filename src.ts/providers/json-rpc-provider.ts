@@ -120,7 +120,8 @@ export class JsonRpcSigner extends Signer {
         if (transaction.gasLimit == null) {
             let estimate = shallowCopy(transaction);
             estimate.from = fromAddress;
-            transaction.gasLimit = this.provider.estimateGas(estimate);
+            transaction.gasLimit = this.provider.estimateGas(estimate)
+                .then( (estimateResult) => estimateResult.gasUsed);
         }
 
         return Promise.all([

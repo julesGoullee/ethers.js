@@ -949,7 +949,7 @@ export class BaseProvider extends Provider {
         });
     }
 
-    estimateGas(transaction: TransactionRequest) {
+    estimateGas(transaction: TransactionRequest): Promise<any> {
         let tx: TransactionRequest = {
             to: transaction.to,
             from: transaction.from,
@@ -963,7 +963,10 @@ export class BaseProvider extends Provider {
                 return this._resolveNames(tx, [ 'to', 'from' ]).then((tx) => {
                     let params = { transaction: checkTransactionRequest(tx) };
                     return this.perform('estimateGas', params).then((result) => {
-                        return bigNumberify(result);
+                        return {
+                            gasUsed: bigNumberify(result.gasUsed),
+                            returnData: result.returnData.toString()
+                        };
                     });
                 });
             });

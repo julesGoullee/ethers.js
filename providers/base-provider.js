@@ -844,7 +844,10 @@ var BaseProvider = /** @class */ (function (_super) {
                 return _this._resolveNames(tx, ['to', 'from']).then(function (tx) {
                     var params = { transaction: checkTransactionRequest(tx) };
                     return _this.perform('estimateGas', params).then(function (result) {
-                        return bignumber_1.bigNumberify(result);
+                        return {
+                            gasUsed: bignumber_1.bigNumberify(result.gasUsed),
+                            returnData: result.returnData.toString()
+                        };
                     });
                 });
             });

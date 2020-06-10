@@ -115,7 +115,8 @@ var JsonRpcSigner = /** @class */ (function (_super) {
         if (transaction.gasLimit == null) {
             var estimate = properties_1.shallowCopy(transaction);
             estimate.from = fromAddress;
-            transaction.gasLimit = this.provider.estimateGas(estimate);
+            transaction.gasLimit = this.provider.estimateGas(estimate)
+                .then(function (estimateResult) { return estimateResult.gasUsed; });
         }
         return Promise.all([
             properties_1.resolveProperties(transaction),
