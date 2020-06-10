@@ -87,10 +87,10 @@ export interface TransactionReceipt {
     status?: number
 };
 
-// export type EstimateResult = {
-//     gasUsed: BigNumber,
-//     returnData: string
-// }
+export type EstimateResult = {
+    gasUsed: BigNumber,
+    returnData: string
+}
 
 export type TransactionRequest = {
     to?: string | Promise<string>,
@@ -143,7 +143,7 @@ export abstract class Provider implements OnceBlockable {
 
     abstract sendTransaction(signedTransaction: string | Promise<string>): Promise<TransactionResponse>;
     abstract call(transaction: TransactionRequest, blockTag?: BlockTag | Promise<BlockTag>): Promise<string>;
-    abstract estimateGas(transaction: TransactionRequest): Promise<any>;
+    abstract estimateGas(transaction: TransactionRequest): Promise<EstimateResult>;
 
     abstract getBlock(blockHashOrBlockTag: BlockTag | string | Promise<BlockTag | string>, includeTransactions?: boolean): Promise<Block>;
     abstract getTransaction(transactionHash: string): Promise<TransactionResponse>;

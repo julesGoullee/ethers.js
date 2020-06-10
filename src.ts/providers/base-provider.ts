@@ -16,7 +16,7 @@ import * as errors from '../errors';
 
 ///////////////////////////////
 // Imported Abstracts
-import { Provider } from './abstract-provider';
+import {EstimateResult, Provider} from './abstract-provider';
 
 
 ///////////////////////////////
@@ -949,7 +949,7 @@ export class BaseProvider extends Provider {
         });
     }
 
-    estimateGas(transaction: TransactionRequest): Promise<any> {
+    estimateGas(transaction: TransactionRequest): Promise<EstimateResult> {
         let tx: TransactionRequest = {
             to: transaction.to,
             from: transaction.from,

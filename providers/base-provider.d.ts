@@ -1,5 +1,5 @@
 import { BigNumber } from '../utils/bignumber';
-import { Provider } from './abstract-provider';
+import { EstimateResult, Provider } from './abstract-provider';
 import { Block, BlockTag, EventType, Filter, FilterByBlock, Listener, Log, TransactionReceipt, TransactionRequest, TransactionResponse } from './abstract-provider';
 import { BigNumberish } from '../utils/bignumber';
 import { Transaction } from '../utils/transaction';
@@ -47,7 +47,7 @@ export declare class BaseProvider extends Provider {
     sendTransaction(signedTransaction: string | Promise<string>): Promise<TransactionResponse>;
     _wrapTransaction(tx: Transaction, hash?: string): TransactionResponse;
     call(transaction: TransactionRequest, blockTag?: BlockTag | Promise<BlockTag>): Promise<string>;
-    estimateGas(transaction: TransactionRequest): Promise<any>;
+    estimateGas(transaction: TransactionRequest): Promise<EstimateResult>;
     getBlock(blockHashOrBlockTag: BlockTag | string | Promise<BlockTag | string>, includeTransactions?: boolean): Promise<Block>;
     getTransaction(transactionHash: string): Promise<TransactionResponse>;
     getTransactionReceipt(transactionHash: string): Promise<TransactionReceipt>;
